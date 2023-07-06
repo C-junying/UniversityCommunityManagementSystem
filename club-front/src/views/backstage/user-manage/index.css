@@ -1,0 +1,9 @@
+input:disabled {
+    color           : #000 !important;
+    background-color: #FFF !important;
+}
+
+textarea:disabled {
+    color           : #000 !important;
+    background-color: #FFF !important;
+}

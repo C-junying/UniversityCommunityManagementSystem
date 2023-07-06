@@ -1,0 +1,29 @@
+.logo {
+  line-height: 32px;
+  color: white;
+  margin: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 18px;
+  text-align: center;
+}
+#home-nav {
+  display: block;
+  position: relative;
+  color: #000;
+  height: 64px;
+}
+#home-nav:hover {
+  color: #f6b04b;
+  animation: upDown 0.5s ease-in-out;
+}
+@keyframes upDown {
+  0% {
+    line-height: 64px;
+  }
+  50% {
+    line-height: 45px;
+  }
+  100% {
+    line-height: 64px;
+  }
+}

@@ -1,0 +1,41 @@
+.header-title {
+    display        : flex;
+    justify-content: flex-start;
+    padding        : 20px;
+}
+
+.header-title .title,
+.header-title .left {
+    font-weight : 800;
+    font-size   : 1.5rem;
+    margin-right: 1rem;
+}
+
+.header-title .left:hover {
+    color : #1677ff;
+    cursor: pointer;
+}
+
+.header-title .sub-title {
+    font-weight: 500;
+    font-size  : 1rem;
+    line-height: 1.7rem;
+    color      : #888B8B;
+}
+
+.my-editor {
+    border: 1px solid #d9d9d9;
+}
+
+.demo-editor {
+    height       : 250px !important;
+    border       : 1px solid #f1f1f1 !important;
+    padding      : 5px !important;
+    border-radius: 2px !important;
+}
+
+.toolbar-class div,
+.demo-wrapper div,
+.demo-editor div {
+    box-sizing: border-box;
+}
