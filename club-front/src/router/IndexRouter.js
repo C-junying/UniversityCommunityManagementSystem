@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
+import { Spin } from 'antd';
 import Login from '@/views/login/Login';
 import Register from '@/views/register/Register';
 import Index from '@/views/index/Index';
@@ -52,28 +53,29 @@ import IndexMyClub from '@/views/index/IndexMyClub';
 import IndexMyActivity from '@/views/index/IndexMyActivity';
 import ResetPassword from '@/views/login/ResetPassword';
 
-// const LazyLoad = (path) => { //传入在view 下的路径
-//   const Comp = React.lazy(() => import(`../view${path}`))
-//   return (
-//       <React.Suspense fallback={<> 加载中...</>}>
-//           <Comp />
-//       </React.Suspense>
-//   )
-// }
+const LazyLoad = (Comp) => {
+  //传入在view 下的路径
+  // const Comp = React.lazy(() => import(`../view${path}`))
+  return (
+    <React.Suspense fallback={<Spin tip="加载中" size="large" />}>
+      <Comp />
+    </React.Suspense>
+  );
+};
 
 export default function IndexRouter() {
   const routes = useRoutes([
     {
       path: '/login',
-      element: <Login />,
+      element: LazyLoad(Login),
     },
     {
       path: '/reset-password',
-      element: <ResetPassword />,
+      element: LazyLoad(ResetPassword),
     },
     {
       path: '/register',
-      element: <Register />,
+      element: LazyLoad(Register),
     },
     {
       path: '/',
@@ -81,20 +83,20 @@ export default function IndexRouter() {
     },
     {
       path: '/index',
-      element: <Index />,
+      element: LazyLoad(Index),
       // element: <Navigate to="backstage" />,
       children: [
         { path: '', element: <Navigate to="system-intro" /> },
-        { path: 'system-intro', element: <SystemIntro /> },
-        { path: 'hot-activity', element: <HotActivity /> },
-        { path: 'hot-club', element: <HotClub /> },
-        { path: 'my-club', element: <IndexMyClub /> },
-        { path: 'my-activity', element: <IndexMyActivity /> },
+        { path: 'system-intro', element: LazyLoad(SystemIntro) },
+        { path: 'hot-activity', element: LazyLoad(HotActivity) },
+        { path: 'hot-club', element: LazyLoad(HotClub) },
+        { path: 'my-club', element: LazyLoad(IndexMyClub) },
+        { path: 'my-activity', element: LazyLoad(IndexMyActivity) },
       ],
     },
     {
       path: '/backstage',
-      element: <AuthRouter element={<BackStage />} />,
+      element: <AuthRouter element={LazyLoad(BackStage)} />,
       children: [
         {
           path: '',
@@ -102,65 +104,65 @@ export default function IndexRouter() {
         },
         {
           path: 'home',
-          element: <Home />,
+          element: LazyLoad(Home),
         },
         {
           path: 'users/list',
-          element: <UserList />,
+          element: LazyLoad(UserList),
         },
         {
           path: 'admin/role',
-          element: <RoleList />,
+          element: LazyLoad(RoleList),
         },
         {
           path: 'admin/menu',
-          element: <MenuList />,
+          element: LazyLoad(MenuList),
         },
         {
           path: 'teacher/list',
-          element: <TeacherList />,
+          element: LazyLoad(TeacherList),
         },
       ],
     },
     {
       path: '/club',
-      element: <AuthRouter element={<BackStage />} />,
+      element: <AuthRouter element={LazyLoad(BackStage)} />,
       children: [
         {
           path: 'list',
-          element: <ClubList />,
+          element: LazyLoad(ClubList),
         },
         {
           path: 'club-type/list',
-          element: <ClubTypeList />,
+          element: LazyLoad(ClubTypeList),
         },
         {
           path: 'club-apply/apply',
-          element: <ClubApply />,
+          element: LazyLoad(ClubApply),
         },
         {
           path: 'club-apply/list',
-          element: <ClubApplyList />,
+          element: LazyLoad(ClubApplyList),
         },
         {
           path: 'club-apply/list/preview/:applyId',
-          element: <ClubPriview />,
+          element: LazyLoad(ClubPriview),
         },
         {
           path: 'club-apply/audit/list/preview/:applyId',
-          element: <ClubPriview />,
+          element: LazyLoad(ClubPriview),
         },
         {
           path: 'club-apply/audit/list',
-          element: <AuditApplyList />,
+          element: LazyLoad(AuditApplyList),
         },
         {
           path: 'my-club',
-          element: <MyClub />,
+          element: LazyLoad(MyClub),
         },
         {
           path: 'my-club/:clubId/intro',
-          element: <MyClubIntro />,
+          element: LazyLoad(MyClubIntro),
           children: [
             {
               path: '',
@@ -168,72 +170,72 @@ export default function IndexRouter() {
             },
             {
               path: 'information',
-              element: <ClubInformation />,
+              element: LazyLoad(ClubInformation),
             },
             {
               path: 'member',
-              element: <ClubMember />,
+              element: LazyLoad(ClubMember),
             },
             {
               path: 'activity',
-              element: <ClubActivity />,
+              element: LazyLoad(ClubActivity),
             },
             {
               path: 'report',
-              element: <ClubReport />,
+              element: LazyLoad(ClubReport),
             },
             {
               path: 'apply-activity',
-              element: <ApplyActivity />,
+              element: LazyLoad(ApplyActivity),
             },
             {
               path: 'apply-activity-list',
-              element: <ApplyActivityList />,
+              element: LazyLoad(ApplyActivityList),
             },
             {
               path: 'apply-money',
-              element: <ApplyMoney />,
+              element: LazyLoad(ApplyMoney),
             },
 
             {
               path: 'cost-list',
-              element: <ClubCostList />,
+              element: LazyLoad(ClubCostList),
             },
             {
               path: 'club-disband',
-              element: <ClubDisband />,
+              element: LazyLoad(ClubDisband),
             },
           ],
         },
         {
           path: 'my-club/:clubId/intro/apply-activity-list/preview/:activityId',
-          element: <ActivityPriview />,
+          element: LazyLoad(ActivityPriview),
         },
         {
           path: 'my-club/:clubId/intro/information/update',
-          element: <UpdateClub />,
+          element: LazyLoad(UpdateClub),
         },
         {
           path: 'my-club/:clubId/intro/report/:userId',
-          element: <AddClubReport />,
+          element: LazyLoad(AddClubReport),
         },
         {
           path: 'my-club/:clubId/intro/report/preview/:reportId',
-          element: <ClubReportPreview />,
+          element: LazyLoad(ClubReportPreview),
         },
       ],
     },
     {
       path: '/activity',
-      element: <AuthRouter element={<BackStage />} />,
+      element: <AuthRouter element={LazyLoad(BackStage)} />,
       children: [
         {
           path: 'list',
-          element: <ActivityList />,
+          element: LazyLoad(ActivityList),
         },
         {
           path: 'list/:activityId/intro',
-          element: <ActivityInfo />,
+          element: LazyLoad(ActivityInfo),
           children: [
             {
               path: '',
@@ -241,29 +243,29 @@ export default function IndexRouter() {
             },
             {
               path: 'information',
-              element: <ActivityInformation />,
+              element: LazyLoad(ActivityInformation),
             },
             {
               path: 'member',
-              element: <ActivityMember />,
+              element: LazyLoad(ActivityMember),
             },
             {
               path: 'activity-stage',
-              element: <ActivityStage />,
+              element: LazyLoad(ActivityStage),
             },
             {
               path: 'report',
-              element: <ActivityReport />,
+              element: LazyLoad(ActivityReport),
             },
           ],
         },
         {
           path: 'user-activity',
-          element: <MyActivity />,
+          element: LazyLoad(MyActivity),
         },
         {
           path: 'user-activity/:activityId/intro',
-          element: <ActivityInfo />,
+          element: LazyLoad(ActivityInfo),
           children: [
             {
               path: '',
@@ -271,73 +273,73 @@ export default function IndexRouter() {
             },
             {
               path: 'information',
-              element: <ActivityInformation />,
+              element: LazyLoad(ActivityInformation),
             },
             {
               path: 'member',
-              element: <ActivityMember />,
+              element: LazyLoad(ActivityMember),
             },
             {
               path: 'activity-stage',
-              element: <ActivityStage />,
+              element: LazyLoad(ActivityStage),
             },
             {
               path: 'report',
-              element: <ActivityReport />,
+              element: LazyLoad(ActivityReport),
             },
           ],
         },
         {
           path: 'activity-type/list',
-          element: <ActivityTypeList />,
+          element: LazyLoad(ActivityTypeList),
         },
         {
           path: 'activity-apply/audit/list',
-          element: <AuditActivityApplyList />,
+          element: LazyLoad(AuditActivityApplyList),
         },
         {
           path: 'activity-apply/audit/list/preview/:activityId',
-          element: <ActivityPriview />,
+          element: LazyLoad(ActivityPriview),
         },
       ],
     },
     {
       path: '/area',
-      element: <AuthRouter element={<BackStage />} />,
+      element: <AuthRouter element={LazyLoad(BackStage)} />,
       children: [
         {
           path: 'list',
-          element: <AreaList />,
+          element: LazyLoad(AreaList),
         },
       ],
     },
     {
       path: '/cost',
-      element: <AuthRouter element={<BackStage />} />,
+      element: <AuthRouter element={LazyLoad(BackStage)} />,
       children: [
         {
           path: 'audit',
-          element: <AuditCostApplyList />,
+          element: LazyLoad(AuditCostApplyList),
         },
         {
           path: 'cost-list',
-          element: <CostList />,
+          element: LazyLoad(CostList),
         },
       ],
     },
     {
       path: '/my',
-      element: <AuthRouter element={<BackStage />} />,
+      element: <AuthRouter element={LazyLoad(BackStage)} />,
       children: [
         {
           path: 'information',
-          element: <MyInformation />,
+          element: LazyLoad(MyInformation),
         },
       ],
     },
     {
       path: '*',
-      element: <Error />,
+      element: LazyLoad(Error),
     },
   ]);
   return routes;
