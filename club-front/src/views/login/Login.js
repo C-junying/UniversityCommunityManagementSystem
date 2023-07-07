@@ -3,9 +3,12 @@ import { MyIcon } from '@/utils/MyIcon';
 import logo from '@/assets/logo.png';
 import './login.css';
 import LoginComponent from '@/components/login/LoginComponent';
-
+import { useRootStore } from '@/stores/RootStore';
+import { observer } from 'mobx-react-lite';
 // 登录
 function Login() {
+  // store
+  const { styleStore } = useRootStore();
   // 手机与邮箱
   const lablePhone = (
     <Form.Item
@@ -44,8 +47,16 @@ function Login() {
   const onChange = (key) => {
     console.log(key);
   };
+  useEffect(() => {
+    // 修改宽度
+    if (window.innerWidth === document.body.clientWidth) {
+      styleStore.setWidth(styleStore.maxWidth);
+    } else {
+      styleStore.setWidth(styleStore.defaultWidth);
+    }
+  }, [styleStore.width]);
   return (
-    <div className="login">
+    <div className="login" style={{ width: styleStore.width }}>
       <Card className="login-container">
         <img className="login-logo" src={logo} alt="#" />
         <Tabs defaultActiveKey="1" centered items={items} destroyInactiveTabPane onChange={onChange} />
@@ -53,4 +64,4 @@ function Login() {
     </div>
   );
 }
-export default Login;
+export default observer(Login);

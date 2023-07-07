@@ -18,13 +18,17 @@ function IndexMyActivity() {
     <>
       {group(indexStore.userActivityList, 3).map((row, idx) => {
         return (
-          <Row gutter={32} key={idx} style={{ marginLeft: 10, padding: '20px 0' }}>
+          <Row gutter={32} key={idx} style={{ marginLeft: 15, padding: '20px 0' }}>
             {row.map((activity) => {
               return (
-                <Col span={8} key={activity['activity_id']} onClick={() => onClick(activity['activity_id'])}>
+                <Col
+                  span={8}
+                  className="index-col"
+                  key={activity['activity_id']}
+                  onClick={() => onClick(activity['activity_id'])}>
                   <Card
                     hoverable
-                    style={{ background: '#FAFAFAD0', minWidth: '280px', maxWidth: '300px' }}
+                    className="index-card"
                     cover={<img alt="example" src={activity['picture']} style={{ height: 150 }} />}>
                     <div>
                       <div

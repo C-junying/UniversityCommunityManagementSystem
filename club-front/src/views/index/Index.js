@@ -20,12 +20,12 @@ function Index() {
   }, []);
   useEffect(() => {
     // 修改宽度
-    if (window.innerWidth === document.body.clientWidth) {
+    if (window.innerWidth === document.documentElement.clientWidth) {
       styleStore.setWidth(styleStore.maxWidth);
     } else {
       styleStore.setWidth(styleStore.defaultWidth);
     }
-  }, [styleStore.width]);
+  }, [document.documentElement.clientWidth, styleStore.width]);
   return (
     <div>
       <header id="index-header">

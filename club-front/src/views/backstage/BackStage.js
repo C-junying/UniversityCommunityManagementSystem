@@ -12,12 +12,12 @@ export default function BackStage() {
   const { styleStore } = useRootStore();
   useEffect(() => {
     // 修改宽度
-    if (window.innerWidth === document.body.clientWidth) {
+    if (window.innerWidth === document.documentElement.clientWidth) {
       styleStore.setWidth(styleStore.maxWidth);
     } else {
       styleStore.setWidth(styleStore.defaultWidth);
     }
-  }, [styleStore.width]);
+  }, [styleStore.width, document.documentElement.clientWidth]);
   return (
     <Layout>
       <SideMenu />
