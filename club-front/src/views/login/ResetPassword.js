@@ -2,7 +2,9 @@ import { Card, Form, Button } from 'antd';
 import logo from '@/assets/logo.png';
 import './login.css';
 import ResetPasswordComponent from '@/components/login/ResetPasswordComponent';
-
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useRootStore } from '@/stores/RootStore';
 const btnReset = (
   <Form.Item>
     <Button type="primary" htmlType="submit" size="large" block className="login-form-button">
@@ -12,9 +14,19 @@ const btnReset = (
   </Form.Item>
 );
 // 注册
-export default function ResetPassword() {
+function ResetPassword() {
+  // store
+  const { styleStore } = useRootStore();
+  useEffect(() => {
+    // 修改宽度
+    if (window.innerWidth === document.body.clientWidth) {
+      styleStore.setWidth(styleStore.maxWidth);
+    } else {
+      styleStore.setWidth(styleStore.defaultWidth);
+    }
+  }, [styleStore.width]);
   return (
-    <div className="register">
+    <div className="register" style={{ width: styleStore.width }}>
       <Card className="register-container">
         <img className="register-logo" src={logo} alt="#" />
         <ResetPasswordComponent lable={btnReset} />
@@ -22,3 +34,4 @@ export default function ResetPassword() {
     </div>
   );
 }
+export default observer(ResetPassword);

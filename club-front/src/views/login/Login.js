@@ -5,6 +5,7 @@ import './login.css';
 import LoginComponent from '@/components/login/LoginComponent';
 import { useRootStore } from '@/stores/RootStore';
 import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
 // 登录
 function Login() {
   // store

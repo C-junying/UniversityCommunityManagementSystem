@@ -4,6 +4,7 @@ import RegisterComponent from '@/components/register/RegisterComponent';
 import './register.css';
 import { useRootStore } from '@/stores/RootStore';
 import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
 
 const btnRegister = (
   <Form.Item>
