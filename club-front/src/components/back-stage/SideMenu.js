@@ -28,7 +28,8 @@ function SideMenu() {
   items = setItems(menuStore.selfMenu);
   // console.log(menuStore.selfMenu);
   return (
-    <Sider style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }}>
+    <Sider
+      style={{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0, zIndex: 100 }}>
       <div className="logo">高校社团管理系统</div>
       <Menu
         theme="dark"

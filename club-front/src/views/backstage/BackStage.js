@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout } from 'antd';
 import SideMenu from '@/components/back-stage/SideMenu';
 import TopHeader from '@/components/back-stage/TopHeader';
 import BottomFooter from '@/components/back-stage/BottomFooter';
 import './BackStage.css';
 import { Outlet } from 'react-router-dom';
+import { useRootStore } from '@/stores/RootStore';
 const { Content } = Layout;
 export default function BackStage() {
+  // store
+  const { styleStore } = useRootStore();
+  useEffect(() => {
+    // 修改宽度
+    if (window.innerWidth === document.body.clientWidth) {
+      styleStore.setWidth(styleStore.maxWidth);
+    } else {
+      styleStore.setWidth(styleStore.defaultWidth);
+    }
+  }, [styleStore.width]);
   return (
     <Layout>
       <SideMenu />
@@ -15,7 +26,6 @@ export default function BackStage() {
         <Content
           style={{
             marginTop: '24px',
-            // overflow: 'auto',
             background: 'white',
           }}>
           <div

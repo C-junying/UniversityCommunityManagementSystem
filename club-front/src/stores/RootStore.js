@@ -18,6 +18,7 @@ import ActivityStore from './ActivityStore/ActivityStore';
 import ActivityMemberStore from './ActivityStore/ActivityMemberStore';
 import ActivityStageStore from './ActivityStore/ActivityStageStore';
 import IndexStore from './IndexStore/IndexStore';
+import StyleStore from './StyleStore/StyleStore';
 
 class RootStore {
   // 组合模块
@@ -60,6 +61,8 @@ class RootStore {
     this.costStore = new CostStore();
     // 费用申请
     this.costProcessStore = new CostProcessStore();
+    // 样式
+    this.styleStore = new StyleStore();
   }
 }
 const rootStore = new RootStore();

@@ -2,8 +2,11 @@ import { dateWeek } from '@/utils/time';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import './index.css';
 import { useEffect, useState } from 'react';
+import { useRootStore } from '@/stores/RootStore';
 // 主页
 function Index() {
+  // store
+  const { styleStore } = useRootStore();
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const [time, setTime] = useState(dateWeek());
@@ -15,6 +18,14 @@ function Index() {
       clearInterval(t);
     };
   }, []);
+  useEffect(() => {
+    // 修改宽度
+    if (window.innerWidth === document.body.clientWidth) {
+      styleStore.setWidth(styleStore.maxWidth);
+    } else {
+      styleStore.setWidth(styleStore.defaultWidth);
+    }
+  }, [styleStore.width]);
   return (
     <div>
       <header id="index-header">
