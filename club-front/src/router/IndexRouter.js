@@ -1,81 +1,70 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
-import { Spin } from 'antd';
-import Login from '@/views/login/Login';
-import Register from '@/views/register/Register';
-import Index from '@/views/index/Index';
-import BackStage from '@/views/backstage/BackStage';
-import Home from '@/views/backstage/home/Home';
-import UserList from '@/views/backstage/user-manage/UserList';
-import RoleList from '@/views/backstage/right-manage/RoleList';
-import MenuList from '@/views/backstage/right-manage/MenuList';
-import Error from '@/components/back-stage/Error';
 import AuthRouter from './AuthRouter';
-import AreaList from '@/views/area/AreaList';
-import ClubList from '@/views/club/ClubList';
-import ActivityList from '@/views/activity/activity/ActivityList';
-import ClubTypeList from '@/views/club/club-type/ClubTypeList';
-import ActivityTypeList from '@/views/activity/activity-type/ActivityTypeList';
-import ClubApply from '@/views/club/club-apply/ClubApply';
-import ClubApplyList from '@/views/club/club-apply/ClubApplyList';
-import ClubPriview from '@/components/club/ClubPriview';
-import AuditApplyList from '@/views/club/club-apply/AuditApplyList';
-import TeacherList from '@/views/backstage/teacher/TeacherList';
-import MyClub from '@/views/club/my-club/MyClub';
-import MyClubIntro from '@/views/club/my-club/MyClubIntro';
-import ClubInformation from '@/views/club/my-club/ClubInformation';
-import ClubMember from '@/views/club/my-club/ClubMember';
-import ClubReport from '@/views/club/my-club/ClubReport';
-import ClubActivity from '@/views/club/activity-apply/ClubActivityList';
-import AddClubReport from '@/components/club/AddClubReport';
-import ClubReportPreview from '@/components/club/ClubReportPreview';
-import UpdateClub from '@/components/club/UpdateClub';
-import ClubDisband from '@/views/club/my-club/ClubDisband';
-import ApplyActivity from '@/views/club/activity-apply/ApplyActivity';
-import ApplyActivityList from '@/views/club/activity-apply/ApplyActivityList';
-import ApplyMoney from '@/views/club/my-club/ApplyMoney';
-import AuditCostApplyList from '@/views/cost/AuditCostApplyList';
-import CostList from '@/views/cost/CostList';
-import ClubCostList from '@/views/club/my-club/ClubCostList';
-import ActivityPriview from '@/components/activity/ActivityPriview';
-import AuditActivityApplyList from '@/views/activity/activity-apply/AuditActivityApplyList';
-import ActivityInfo from '@/views/activity/activity/ActivityInfo';
-import ActivityInformation from '@/views/activity/ActivityInformation';
-import ActivityMember from '@/views/activity/ActivityMember';
-import ActivityStage from '@/views/activity/ActivityStage';
-import ActivityReport from '@/views/activity/ActivityReport';
-import MyInformation from '@/views/backstage/user-manage/MyInformation';
-import SystemIntro from '@/components/back-stage/SystemIntro';
-import MyActivity from '@/views/activity/activity/MyActivity';
-import HotActivity from '@/views/index/HotActivity';
-import HotClub from '@/views/index/HotClub';
-import IndexMyClub from '@/views/index/IndexMyClub';
-import IndexMyActivity from '@/views/index/IndexMyActivity';
-import ResetPassword from '@/views/login/ResetPassword';
-
-const LazyLoad = (Comp) => {
-  //传入在view 下的路径
-  // const Comp = React.lazy(() => import(`../view${path}`))
-  return (
-    <React.Suspense fallback={<Spin tip="加载中" size="large" />}>
-      <Comp />
-    </React.Suspense>
-  );
-};
+const Login = React.lazy(() => import('@/views/login/Login'));
+const Register = React.lazy(() => import('@/views/register/Register'));
+const Index = React.lazy(() => import('@/views/index/Index'));
+const BackStage = React.lazy(() => import('@/views/backstage/BackStage'));
+const Home = React.lazy(() => import('@/views/backstage/home/Home'));
+const UserList = React.lazy(() => import('@/views/backstage/user-manage/UserList'));
+const RoleList = React.lazy(() => import('@/views/backstage/right-manage/RoleList'));
+const MenuList = React.lazy(() => import('@/views/backstage/right-manage/MenuList'));
+const Error = React.lazy(() => import('@/components/back-stage/Error'));
+const AreaList = React.lazy(() => import('@/views/area/AreaList'));
+const ClubList = React.lazy(() => import('@/views/club/ClubList'));
+const ActivityList = React.lazy(() => import('@/views/activity/activity/ActivityList'));
+const ClubTypeList = React.lazy(() => import('@/views/club/club-type/ClubTypeList'));
+const ActivityTypeList = React.lazy(() => import('@/views/activity/activity-type/ActivityTypeList'));
+const ClubApply = React.lazy(() => import('@/views/club/club-apply/ClubApply'));
+const ClubApplyList = React.lazy(() => import('@/views/club/club-apply/ClubApplyList'));
+const ClubPriview = React.lazy(() => import('@/components/club/ClubPriview'));
+const AuditApplyList = React.lazy(() => import('@/views/club/club-apply/AuditApplyList'));
+const TeacherList = React.lazy(() => import('@/views/backstage/teacher/TeacherList'));
+const MyClub = React.lazy(() => import('@/views/club/my-club/MyClub'));
+const MyClubIntro = React.lazy(() => import('@/views/club/my-club/MyClubIntro'));
+const ClubInformation = React.lazy(() => import('@/views/club/my-club/ClubInformation'));
+const ClubMember = React.lazy(() => import('@/views/club/my-club/ClubMember'));
+const ClubReport = React.lazy(() => import('@/views/club/my-club/ClubReport'));
+const ClubActivity = React.lazy(() => import('@/views/club/activity-apply/ClubActivityList'));
+const AddClubReport = React.lazy(() => import('@/components/club/AddClubReport'));
+const ClubReportPreview = React.lazy(() => import('@/components/club/ClubReportPreview'));
+const UpdateClub = React.lazy(() => import('@/components/club/UpdateClub'));
+const ClubDisband = React.lazy(() => import('@/views/club/my-club/ClubDisband'));
+const ApplyActivity = React.lazy(() => import('@/views/club/activity-apply/ApplyActivity'));
+const ApplyActivityList = React.lazy(() => import('@/views/club/activity-apply/ApplyActivityList'));
+const ApplyMoney = React.lazy(() => import('@/views/club/my-club/ApplyMoney'));
+const AuditCostApplyList = React.lazy(() => import('@/views/cost/AuditCostApplyList'));
+const CostList = React.lazy(() => import('@/views/cost/CostList'));
+const ClubCostList = React.lazy(() => import('@/views/club/my-club/ClubCostList'));
+const ActivityPriview = React.lazy(() => import('@/components/activity/ActivityPriview'));
+const AuditActivityApplyList = React.lazy(() => import('@/views/activity/activity-apply/AuditActivityApplyList'));
+const ActivityInfo = React.lazy(() => import('@/views/activity/activity/ActivityInfo'));
+const ActivityInformation = React.lazy(() => import('@/views/activity/ActivityInformation'));
+const ActivityMember = React.lazy(() => import('@/views/activity/ActivityMember'));
+const ActivityStage = React.lazy(() => import('@/views/activity/ActivityStage'));
+const ActivityReport = React.lazy(() => import('@/views/activity/ActivityReport'));
+const MyInformation = React.lazy(() => import('@/views/backstage/user-manage/MyInformation'));
+const SystemIntro = React.lazy(() => import('@/components/back-stage/SystemIntro'));
+const MyActivity = React.lazy(() => import('@/views/activity/activity/MyActivity'));
+const HotActivity = React.lazy(() => import('@/views/index/HotActivity'));
+const HotClub = React.lazy(() => import('@/views/index/HotClub'));
+const IndexMyClub = React.lazy(() => import('@/views/index/IndexMyClub'));
+const IndexMyActivity = React.lazy(() => import('@/views/index/IndexMyActivity'));
+const ResetPassword = React.lazy(() => import('@/views/login/ResetPassword'));
 
 export default function IndexRouter() {
   const routes = useRoutes([
     {
       path: '/login',
-      element: LazyLoad(Login),
+      element: <Login />,
     },
     {
       path: '/reset-password',
-      element: LazyLoad(ResetPassword),
+      element: <ResetPassword />,
     },
     {
       path: '/register',
-      element: LazyLoad(Register),
+      element: <Register />,
     },
     {
       path: '/',
@@ -83,20 +72,20 @@ export default function IndexRouter() {
     },
     {
       path: '/index',
-      element: LazyLoad(Index),
+      element: <Index />,
       // element: <Navigate to="backstage" />,
       children: [
         { path: '', element: <Navigate to="system-intro" /> },
-        { path: 'system-intro', element: LazyLoad(SystemIntro) },
-        { path: 'hot-activity', element: LazyLoad(HotActivity) },
-        { path: 'hot-club', element: LazyLoad(HotClub) },
-        { path: 'my-club', element: LazyLoad(IndexMyClub) },
-        { path: 'my-activity', element: LazyLoad(IndexMyActivity) },
+        { path: 'system-intro', element: <SystemIntro /> },
+        { path: 'hot-activity', element: <HotActivity /> },
+        { path: 'hot-club', element: <HotClub /> },
+        { path: 'my-club', element: <IndexMyClub /> },
+        { path: 'my-activity', element: <IndexMyActivity /> },
       ],
     },
     {
       path: '/backstage',
-      element: <AuthRouter element={LazyLoad(BackStage)} />,
+      element: <AuthRouter element={<BackStage />} />,
       children: [
         {
           path: '',
@@ -104,65 +93,65 @@ export default function IndexRouter() {
         },
         {
           path: 'home',
-          element: LazyLoad(Home),
+          element: <Home />,
         },
         {
           path: 'users/list',
-          element: LazyLoad(UserList),
+          element: <UserList />,
         },
         {
           path: 'admin/role',
-          element: LazyLoad(RoleList),
+          element: <RoleList />,
         },
         {
           path: 'admin/menu',
-          element: LazyLoad(MenuList),
+          element: <MenuList />,
         },
         {
           path: 'teacher/list',
-          element: LazyLoad(TeacherList),
+          element: <TeacherList />,
         },
       ],
     },
     {
       path: '/club',
-      element: <AuthRouter element={LazyLoad(BackStage)} />,
+      element: <AuthRouter element={<BackStage />} />,
       children: [
         {
           path: 'list',
-          element: LazyLoad(ClubList),
+          element: <ClubList />,
         },
         {
           path: 'club-type/list',
-          element: LazyLoad(ClubTypeList),
+          element: <ClubTypeList />,
         },
         {
           path: 'club-apply/apply',
-          element: LazyLoad(ClubApply),
+          element: <ClubApply />,
         },
         {
           path: 'club-apply/list',
-          element: LazyLoad(ClubApplyList),
+          element: <ClubApplyList />,
         },
         {
           path: 'club-apply/list/preview/:applyId',
-          element: LazyLoad(ClubPriview),
+          element: <ClubPriview />,
         },
         {
           path: 'club-apply/audit/list/preview/:applyId',
-          element: LazyLoad(ClubPriview),
+          element: <ClubPriview />,
         },
         {
           path: 'club-apply/audit/list',
-          element: LazyLoad(AuditApplyList),
+          element: <AuditApplyList />,
         },
         {
           path: 'my-club',
-          element: LazyLoad(MyClub),
+          element: <MyClub />,
         },
         {
           path: 'my-club/:clubId/intro',
-          element: LazyLoad(MyClubIntro),
+          element: <MyClubIntro />,
           children: [
             {
               path: '',
@@ -170,72 +159,72 @@ export default function IndexRouter() {
             },
             {
               path: 'information',
-              element: LazyLoad(ClubInformation),
+              element: <ClubInformation />,
             },
             {
               path: 'member',
-              element: LazyLoad(ClubMember),
+              element: <ClubMember />,
             },
             {
               path: 'activity',
-              element: LazyLoad(ClubActivity),
+              element: <ClubActivity />,
             },
             {
               path: 'report',
-              element: LazyLoad(ClubReport),
+              element: <ClubReport />,
             },
             {
               path: 'apply-activity',
-              element: LazyLoad(ApplyActivity),
+              element: <ApplyActivity />,
             },
             {
               path: 'apply-activity-list',
-              element: LazyLoad(ApplyActivityList),
+              element: <ApplyActivityList />,
             },
             {
               path: 'apply-money',
-              element: LazyLoad(ApplyMoney),
+              element: <ApplyMoney />,
             },
 
             {
               path: 'cost-list',
-              element: LazyLoad(ClubCostList),
+              element: <ClubCostList />,
             },
             {
               path: 'club-disband',
-              element: LazyLoad(ClubDisband),
+              element: <ClubDisband />,
             },
           ],
         },
         {
           path: 'my-club/:clubId/intro/apply-activity-list/preview/:activityId',
-          element: LazyLoad(ActivityPriview),
+          element: <ActivityPriview />,
         },
         {
           path: 'my-club/:clubId/intro/information/update',
-          element: LazyLoad(UpdateClub),
+          element: <UpdateClub />,
         },
         {
           path: 'my-club/:clubId/intro/report/:userId',
-          element: LazyLoad(AddClubReport),
+          element: <AddClubReport />,
         },
         {
           path: 'my-club/:clubId/intro/report/preview/:reportId',
-          element: LazyLoad(ClubReportPreview),
+          element: <ClubReportPreview />,
         },
       ],
     },
     {
       path: '/activity',
-      element: <AuthRouter element={LazyLoad(BackStage)} />,
+      element: <AuthRouter element={<BackStage />} />,
       children: [
         {
           path: 'list',
-          element: LazyLoad(ActivityList),
+          element: <ActivityList />,
         },
         {
           path: 'list/:activityId/intro',
-          element: LazyLoad(ActivityInfo),
+          element: <ActivityInfo />,
           children: [
             {
               path: '',
@@ -243,29 +232,29 @@ export default function IndexRouter() {
             },
             {
               path: 'information',
-              element: LazyLoad(ActivityInformation),
+              element: <ActivityInformation />,
             },
             {
               path: 'member',
-              element: LazyLoad(ActivityMember),
+              element: <ActivityMember />,
             },
             {
               path: 'activity-stage',
-              element: LazyLoad(ActivityStage),
+              element: <ActivityStage />,
             },
             {
               path: 'report',
-              element: LazyLoad(ActivityReport),
+              element: <ActivityReport />,
             },
           ],
         },
         {
           path: 'user-activity',
-          element: LazyLoad(MyActivity),
+          element: <MyActivity />,
         },
         {
           path: 'user-activity/:activityId/intro',
-          element: LazyLoad(ActivityInfo),
+          element: <ActivityInfo />,
           children: [
             {
               path: '',
@@ -273,73 +262,73 @@ export default function IndexRouter() {
             },
             {
               path: 'information',
-              element: LazyLoad(ActivityInformation),
+              element: <ActivityInformation />,
             },
             {
               path: 'member',
-              element: LazyLoad(ActivityMember),
+              element: <ActivityMember />,
             },
             {
               path: 'activity-stage',
-              element: LazyLoad(ActivityStage),
+              element: <ActivityStage />,
             },
             {
               path: 'report',
-              element: LazyLoad(ActivityReport),
+              element: <ActivityReport />,
             },
           ],
         },
         {
           path: 'activity-type/list',
-          element: LazyLoad(ActivityTypeList),
+          element: <ActivityTypeList />,
         },
         {
           path: 'activity-apply/audit/list',
-          element: LazyLoad(AuditActivityApplyList),
+          element: <AuditActivityApplyList />,
         },
         {
           path: 'activity-apply/audit/list/preview/:activityId',
-          element: LazyLoad(ActivityPriview),
+          element: <ActivityPriview />,
         },
       ],
     },
     {
       path: '/area',
-      element: <AuthRouter element={LazyLoad(BackStage)} />,
+      element: <AuthRouter element={<BackStage />} />,
       children: [
         {
           path: 'list',
-          element: LazyLoad(AreaList),
+          element: <AreaList />,
         },
       ],
     },
     {
       path: '/cost',
-      element: <AuthRouter element={LazyLoad(BackStage)} />,
+      element: <AuthRouter element={<BackStage />} />,
       children: [
         {
           path: 'audit',
-          element: LazyLoad(AuditCostApplyList),
+          element: <AuditCostApplyList />,
         },
         {
           path: 'cost-list',
-          element: LazyLoad(CostList),
+          element: <CostList />,
         },
       ],
     },
     {
       path: '/my',
-      element: <AuthRouter element={LazyLoad(BackStage)} />,
+      element: <AuthRouter element={<BackStage />} />,
       children: [
         {
           path: 'information',
-          element: LazyLoad(MyInformation),
+          element: <MyInformation />,
         },
       ],
     },
     {
       path: '*',
-      element: LazyLoad(Error),
+      element: <Error />,
     },
   ]);
   return routes;
