@@ -13,7 +13,11 @@ class ActivityProcessStore {
   // 活动申请
   applyActivity(value) {
     this.bool = true;
-    return http.post('/activity/addActivityApply', toHump(value));
+    return http.post('/activity/addActivityApply', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 返回当前社团活动申请列表
   async getClubApplyActivityList(value) {
@@ -21,7 +25,11 @@ class ActivityProcessStore {
       return;
     }
     this.bool = false;
-    let list = await http.post('/activity/clubApplyActivityAll', toHump(value));
+    let list = await http.post('/activity/clubApplyActivityAll', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.clubApplyActivity = list.data.data;
     });
@@ -29,7 +37,11 @@ class ActivityProcessStore {
   // 撤销活动申请
   deleteAppleActivity(value) {
     this.clubApplyActivity = this.clubApplyActivity.filter((data) => data['activity_id'] !== value['activity_id']);
-    return http.post('/activity/deleteApplyActivity', toHump(value));
+    return http.post('/activity/deleteApplyActivity', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 发布活动
   updateClubApplyActivity(value) {
@@ -40,14 +52,22 @@ class ActivityProcessStore {
       return item;
     });
 
-    return http.post('/activity/releaseActivity', toHump(value));
+    return http.post('/activity/releaseActivity', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 所有活动申请,true强制请求，false不强制
   async getApplyActivityList(flag) {
     if (this.applyActivityList.length > 0 && !flag) {
       return;
     }
-    let list = await http.post('/activity/applyActivityAll');
+    let list = await http.post('/activity/applyActivityAll', {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.applyActivityList = list.data.data;
     });
@@ -60,11 +80,23 @@ class ActivityProcessStore {
       }
       return item;
     });
-    return http.post('/activity/auditApplyActivity', toHump(value));
+    return http.post('/activity/auditApplyActivity', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 申请社团查询
   async getSearch(value) {
-    let list = await http.post('/activity/searchApplyActivity', { keywords: value });
+    let list = await http.post(
+      '/activity/searchApplyActivity',
+      { keywords: value },
+      {
+        headers: {
+          isLoading: true,
+        },
+      }
+    );
     runInAction(() => {
       this.applyActivityList = list.data.data;
     });

@@ -12,28 +12,48 @@ class ClubReportStore {
     if (this.clubReportList.length > 0 && !flag) {
       return;
     }
-    let clubReportList = await http.post('/club/clubIdReportAll', toHump(value));
+    let clubReportList = await http.post('/club/clubIdReportAll', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.clubReportList = clubReportList.data.data;
     });
   }
   // 社长添加社团报告
   captainAddClubReport(value) {
-    return http.post('/club/addReport', toHump(value));
+    return http.post('/club/addReport', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 当前报告
   getCurrentReport(value) {
-    return http.post('/club/lookClubIdReportId', value);
+    return http.post('/club/lookClubIdReportId', value, {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除社团报告
   deleteClubReport(item) {
     this.clubReportList = this.clubReportList.filter((report) => report['report_id'] !== item['report_id']);
-    return http.post('/club/deleteReport', toHump(item));
+    return http.post('/club/deleteReport', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
 
   // 社团报告查询 value:{ clubId, keywords: value }
   async getSearch(value) {
-    let clubReportList = await http.post('/club/searchClubClubReport', value);
+    let clubReportList = await http.post('/club/searchClubClubReport', value, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.clubReportList = clubReportList.data.data;
     });

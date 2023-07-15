@@ -12,20 +12,32 @@ class ClubTypeStore {
     if (this.typeList.length > 0 && !flag) {
       return;
     }
-    let typeList = await http.post('/club/clubTypeAll');
+    let typeList = await http.post('/club/clubTypeAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.typeList = typeList.data.data;
     });
   }
   // 添加社团类型
   addType(value) {
-    return http.post('/club/addClubType', toHump(value));
+    return http.post('/club/addClubType', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除社团类型
   deleteType(item) {
     this.typeList = this.typeList.filter((type) => type['type_id'] !== item['type_id']);
 
-    return http.post('/club/deleteClubType', toHump(item));
+    return http.post('/club/deleteClubType', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 更新社团类型
   updateType(value) {
@@ -36,12 +48,24 @@ class ClubTypeStore {
       return item;
     });
 
-    return http.post('/club/updateClubType', toHump(value));
+    return http.post('/club/updateClubType', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
 
   // 社团类型查询
   async getSearch(value) {
-    let typeList = await http.post('/club/clubTypeSearch', { keywords: value });
+    let typeList = await http.post(
+      '/club/clubTypeSearch',
+      { keywords: value },
+      {
+        headers: {
+          isLoading: true,
+        },
+      }
+    );
     runInAction(() => {
       this.typeList = typeList.data.data;
     });

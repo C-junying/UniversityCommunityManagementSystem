@@ -21,7 +21,11 @@ class ActivityStore {
     if (this.activityList.length > 0 && !flag) {
       return;
     }
-    let activityList = await http.post('/activity/getManageActivityAll');
+    let activityList = await http.post('/activity/getManageActivityAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.activityList = activityList.data.data;
     });
@@ -32,7 +36,11 @@ class ActivityStore {
     if (this.userActivityList.length > 0 && !flag) {
       return;
     }
-    let list = await http.post('/activity/getUserActivityAll');
+    let list = await http.post('/activity/getUserActivityAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.userActivityList = list.data.data;
     });
@@ -43,7 +51,11 @@ class ActivityStore {
     if (this.clubActivityList.length > 0) {
       return;
     }
-    let list = await http.post('/activity/getClubActivityAll', toHump(value));
+    let list = await http.post('/activity/getClubActivityAll', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.clubActivityList = list.data.data;
     });
@@ -56,7 +68,11 @@ class ActivityStore {
     if (JSON.stringify(this.userPosition) !== '{}') {
       return;
     }
-    const bear = await http.post('/activity/activityIdUserIdToBearName', toHump(value));
+    const bear = await http.post('/activity/activityIdUserIdToBearName', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       if (bear.data.data.member.length > 0) {
         this.userPosition = bear.data.data.member[0];
@@ -67,41 +83,73 @@ class ActivityStore {
   }
   // 当前社团的相关信息
   async currentActivityDesciption(value) {
-    let res = await http.post('/activity/activityIdApplyActivity', toHump(value));
+    let res = await http.post('/activity/activityIdApplyActivity', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.currentActivity = res.data.data[0];
     });
   }
   // 社团的担任老师
   currentActivityTeacher(value) {
-    return http.post('/teacher/clubIdTeacher', toHump(value));
+    return http.post('/teacher/clubIdTeacher', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除社团
   deleteClub(item) {
     this.activityList = this.activityList.filter((user) => user['user_id'] !== item['user_id']);
 
-    return http.post('/users/delete', toHump(item));
+    return http.post('/users/delete', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 更新社团
   updateClub(value) {
     this.currentActivity = { ...this.currentActivity, ...value };
-    return http.post('/activity/updateClubInfo', toHump(value));
+    return http.post('/activity/updateClubInfo', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
 
   // 活动查询
   async getSearch(value) {
-    let activityList = await http.post('/activity/searchActivity', { keywords: value });
+    let activityList = await http.post(
+      '/activity/searchActivity',
+      { keywords: value },
+      {
+        headers: {
+          isLoading: true,
+        },
+      }
+    );
     runInAction(() => {
       this.activityList = activityList.data.data;
     });
   }
   // 提交活动总结
   activityReport(value) {
-    return http.post('/activity/addactivityReport', toHump(value));
+    return http.post('/activity/addactivityReport', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 撤回活动总结
   cancleActivityReport(value) {
-    return http.post('/activity/alteractivityReport', toHump(value));
+    return http.post('/activity/alteractivityReport', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   reset() {
     this.clubActivityList = [];

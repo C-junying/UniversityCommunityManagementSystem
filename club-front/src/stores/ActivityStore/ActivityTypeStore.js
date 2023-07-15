@@ -12,20 +12,32 @@ class ActivityTypeStore {
     if (this.typeList.length > 0 && !flag) {
       return;
     }
-    let typeList = await http.post('/activity/activityTypeAll');
+    let typeList = await http.post('/activity/activityTypeAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.typeList = typeList.data.data;
     });
   }
   // 添加活动类型
   addType(value) {
-    return http.post('/activity/addActivityType', toHump(value));
+    return http.post('/activity/addActivityType', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除活动类型
   deleteType(item) {
     this.typeList = this.typeList.filter((type) => type['type_id'] !== item['type_id']);
 
-    return http.post('/activity/deleteActivityType', toHump(item));
+    return http.post('/activity/deleteActivityType', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 更新活动类型
   updateType(value) {
@@ -36,12 +48,24 @@ class ActivityTypeStore {
       return item;
     });
 
-    return http.post('/activity/updateActivityType', toHump(value));
+    return http.post('/activity/updateActivityType', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
 
   // 活动类型查询
   async getSearch(value) {
-    let typeList = await http.post('/activity/activityTypeSearch', { keywords: value });
+    let typeList = await http.post(
+      '/activity/activityTypeSearch',
+      { keywords: value },
+      {
+        headers: {
+          isLoading: true,
+        },
+      }
+    );
     runInAction(() => {
       this.typeList = typeList.data.data;
     });

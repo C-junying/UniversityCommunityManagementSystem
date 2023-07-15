@@ -26,9 +26,9 @@ function ResetPassword() {
     }
   }, [styleStore.width]);
   return (
-    <div className="register" style={{ width: styleStore.width }}>
-      <Card className="register-container">
-        <img className="register-logo" src={logo} alt="#" />
+    <div className="login" style={{ width: styleStore.width }}>
+      <Card className="login-container">
+        <img className="login-logo" src={logo} alt="#" />
         <ResetPasswordComponent lable={btnReset} />
       </Card>
     </div>

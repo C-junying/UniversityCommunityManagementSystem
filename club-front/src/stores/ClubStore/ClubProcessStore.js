@@ -13,7 +13,11 @@ class ClubProcessStore {
   // 申请社团
   applyClub(value) {
     this.bool = true;
-    return http.post('/club/addApplyClub', toHump(value));
+    return http.post('/club/addApplyClub', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 返回当前用户申请列表
   async getUserApplyClubList() {
@@ -21,7 +25,11 @@ class ClubProcessStore {
       return;
     }
     this.bool = false;
-    let list = await http.post('/club/userApplyClubAll');
+    let list = await http.post('/club/userApplyClubAll', {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.userApplyClub = list.data.data;
     });
@@ -29,7 +37,11 @@ class ClubProcessStore {
   // 撤销申请社团
   deleteAppleClub(value) {
     this.userApplyClub = this.userApplyClub.filter((data) => data['apply_id'] !== value['apply_id']);
-    return http.post('/club/deleteApplyClub', toHump(value));
+    return http.post('/club/deleteApplyClub', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 发布社团
   updateUserApplyClub(value) {
@@ -40,14 +52,22 @@ class ClubProcessStore {
       return item;
     });
 
-    return http.post('/club/releaseClub', toHump(value));
+    return http.post('/club/releaseClub', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 所有社团申请,true强制请求，false不强制
   async getApplyClubList(flag) {
     if (this.applyClubList.length > 0 && !flag) {
       return;
     }
-    let list = await http.post('/club/applyClubAll');
+    let list = await http.post('/club/applyClubAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.applyClubList = list.data.data;
     });
@@ -60,11 +80,23 @@ class ClubProcessStore {
       }
       return item;
     });
-    return http.post('/club/auditApplyClub', toHump(value));
+    return http.post('/club/auditApplyClub', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 申请社团查询
   async getSearch(value) {
-    let list = await http.post('/club/searchApplyClub', { keywords: value });
+    let list = await http.post(
+      '/club/searchApplyClub',
+      { keywords: value },
+      {
+        headers: {
+          isLoading: true,
+        },
+      }
+    );
     runInAction(() => {
       this.applyClubList = list.data.data;
     });

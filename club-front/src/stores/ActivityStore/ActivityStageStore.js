@@ -12,23 +12,39 @@ class ActivityStageStore {
     if (this.activityStageList.length > 0 && !flag) {
       return;
     }
-    let list = await http.post('/activity/getActivityStage', toHump(value));
+    let list = await http.post('/activity/getActivityStage', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.activityStageList = list.data.data;
     });
   }
   // 活动负责人添加活动阶段
   captainAddActivityStage(value) {
-    return http.post('/activity/addActivityStage', toHump(value));
+    return http.post('/activity/addActivityStage', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 当前报告
   getCurrentReport(value) {
-    return http.post('/activity/getStageInfo', toHump(value));
+    return http.post('/activity/getStageInfo', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除活动阶段
   deleteActivityStage(item) {
     this.activityStageList = this.activityStageList.filter((report) => report['stage_id'] !== item['stage_id']);
-    return http.post('/activity/deleteActivityStage', toHump(item));
+    return http.post('/activity/deleteActivityStage', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   reset() {
     this.activityStageList = [];

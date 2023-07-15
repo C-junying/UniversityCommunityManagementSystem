@@ -4,14 +4,14 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { RootStoreProvider } from './stores/RootStore';
-import { Spin } from 'antd';
+import Loading from './utils/Loading';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <BrowserRouter>
     <RootStoreProvider>
-      <React.Suspense fallback={<Spin tip="加载中" size="large" />}>
+      <React.Suspense fallback={<Loading />}>
         <App />
       </React.Suspense>
     </RootStoreProvider>

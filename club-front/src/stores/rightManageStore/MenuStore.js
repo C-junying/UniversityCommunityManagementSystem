@@ -14,19 +14,31 @@ class MenuStore {
     if (this.menuList.length > 0) {
       return;
     }
-    let menuList = await http.post('/menu/roleSelect');
+    let menuList = await http.post('/menu/roleSelect', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.menuList = menuList.data.data;
     });
   }
   // 添加菜单
   addMenu(value) {
-    return http.post('/menu/addMenu', toHump(value));
+    return http.post('/menu/addMenu', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除菜单
   deleteMenu(item) {
     this.menuList = deleteTree(this.menuList, item['menu_id']);
-    return http.post('/menu/deleteMenu', toHump(item));
+    return http.post('/menu/deleteMenu', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 更新菜单
   updateMenu(value) {
@@ -37,14 +49,22 @@ class MenuStore {
       return item;
     });
 
-    return http.post('/menu/updateMenu', toHump(value));
+    return http.post('/menu/updateMenu', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 根据token角色获得菜单
   async tokenMenuList() {
     if (this.selfMenu.length > 0) {
       return;
     }
-    let list = await http.post('/menu/menuList').then((res) => res);
+    let list = await http.post('/menu/menuList', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.selfMenu = list.data.data;
     });

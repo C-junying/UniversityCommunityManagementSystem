@@ -12,23 +12,39 @@ class ActivityMemberStore {
     if (this.memberList.length > 0 && !flag) {
       return;
     }
-    let memberList = await http.post('/activity/getActivityMember', toHump(value));
+    let memberList = await http.post('/activity/getActivityMember', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.memberList = memberList.data.data;
     });
   }
   // 用户加入活动
   addActivityMember(value) {
-    return http.post('/activity/userJoinMember', toHump(value));
+    return http.post('/activity/userJoinMember', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 添加成员
   captainAddActivityMember(value) {
-    return http.post('/activity/addMember', toHump(value));
+    return http.post('/activity/addMember', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除成员
   deleteMember(item) {
     this.memberList = this.memberList.filter((member) => member['user_id'] !== item['user_id']);
-    return http.post('/activity/deleteMember', toHump(item));
+    return http.post('/activity/deleteMember', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 更新成员职位
   updateMemberBear(value) {
@@ -39,12 +55,20 @@ class ActivityMemberStore {
       return item;
     });
 
-    return http.post('/activity/updateMemberBear', toHump(value));
+    return http.post('/activity/updateMemberBear', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
 
   // 成员查询 value:{ activityId, keywords: value }
   async getSearch(value) {
-    let memberList = await http.post('/activity/searchActivityMember', value);
+    let memberList = await http.post('/activity/searchActivityMember', value, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.memberList = memberList.data.data;
     });

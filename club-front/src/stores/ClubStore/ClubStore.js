@@ -19,7 +19,11 @@ class ClubStore {
     if (this.clubList.length > 0 && !flag) {
       return;
     }
-    let clubList = await http.post('/club/getClubsAll');
+    let clubList = await http.post('/club/getClubsAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.clubList = clubList.data.data;
     });
@@ -30,7 +34,11 @@ class ClubStore {
     if (this.userClubList.length > 0) {
       return;
     }
-    let list = await http.post('/club/getUserClubs');
+    let list = await http.post('/club/getUserClubs', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.userClubList = list.data.data;
     });
@@ -43,7 +51,11 @@ class ClubStore {
     if (JSON.stringify(this.userPosition) !== '{}') {
       return;
     }
-    const bear = await http.post('/club/clubIdUserIdToBearName', toHump(value));
+    const bear = await http.post('/club/clubIdUserIdToBearName', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       if (bear.data.data.member.length > 0) {
         this.userPosition = bear.data.data.member[0];
@@ -54,25 +66,41 @@ class ClubStore {
   }
   // 当前社团的相关信息
   async currentClubDesciption(value) {
-    let res = await http.post('/club/clubIdApplyClub', toHump(value));
+    let res = await http.post('/club/clubIdApplyClub', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.currentClub = res.data.data[0];
     });
   }
   // 社团的担任老师
   currentClubTeacher(value) {
-    return http.post('/teacher/clubIdTeacher', toHump(value));
+    return http.post('/teacher/clubIdTeacher', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除社团
   deleteClub(item) {
     this.clubList = this.clubList.filter((user) => user['user_id'] !== item['user_id']);
 
-    return http.post('/users/delete', toHump(item));
+    return http.post('/users/delete', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 更新社团
   updateClub(value) {
     this.currentClub = { ...this.currentClub, ...value };
-    return http.post('/club/updateClubInfo', toHump(value));
+    return http.post('/club/updateClubInfo', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
 
   // 社团查询
@@ -84,11 +112,19 @@ class ClubStore {
   }
   // 解散社团
   clubDisband(value) {
-    return http.post('/club/clubDisband', toHump(value));
+    return http.post('/club/clubDisband', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 撤回社团解散
   cancleClubDisband(value) {
-    return http.post('/club/alterclubDisband', toHump(value));
+    return http.post('/club/alterclubDisband', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   reset() {
     this.userPosition = {};

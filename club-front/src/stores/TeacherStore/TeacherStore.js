@@ -12,20 +12,32 @@ class TeacherStore {
     if (this.teacherList.length > 0 && !flag) {
       return;
     }
-    let teacherList = await http.post('/teacher/teacherAll');
+    let teacherList = await http.post('/teacher/teacherAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.teacherList = teacherList.data.data;
     });
   }
   // 添加老师
   addTeacher(value) {
-    return http.post('/teacher/addteacher', toHump(value));
+    return http.post('/teacher/addteacher', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除老师
   deleteTeacher(item) {
     this.teacherList = this.teacherList.filter((teacher) => teacher['teacher_id'] !== item['teacher_id']);
 
-    return http.post('/teacher/deleteteacher', toHump(item));
+    return http.post('/teacher/deleteteacher', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 更新老师
   updateTeacher(value) {
@@ -36,12 +48,24 @@ class TeacherStore {
       return item;
     });
 
-    return http.post('/teacher/updateteacher', toHump(value));
+    return http.post('/teacher/updateteacher', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
 
   // 老师查询
   async getSearch(value) {
-    let teacherList = await http.post('/teacher/teacherSearch', { keywords: value });
+    let teacherList = await http.post(
+      '/teacher/teacherSearch',
+      { keywords: value },
+      {
+        headers: {
+          isLoading: true,
+        },
+      }
+    );
     runInAction(() => {
       this.teacherList = teacherList.data.data;
     });

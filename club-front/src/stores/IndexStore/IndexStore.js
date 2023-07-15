@@ -18,7 +18,11 @@ class IndexStore {
     if (this.activityList.length > 0 && !flag) {
       return;
     }
-    let activityList = await http.post('/activity/getManageActivityAll');
+    let activityList = await http.post('/activity/getManageActivityAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.activityList = activityList.data.data;
     });
@@ -29,7 +33,11 @@ class IndexStore {
     if (this.clubList.length > 0 && !flag) {
       return;
     }
-    let clubList = await http.post('/club/getClubsAll');
+    let clubList = await http.post('/club/getClubsAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.clubList = clubList.data.data;
     });
@@ -40,7 +48,11 @@ class IndexStore {
     if (this.userClubList.length > 0 && !flag) {
       return;
     }
-    let list = await http.post('/club/getUserClubs');
+    let list = await http.post('/club/getUserClubs', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.userClubList = list.data.data;
     });
@@ -51,7 +63,11 @@ class IndexStore {
     if (this.userActivityList.length > 0 && !flag) {
       return;
     }
-    let list = await http.post('/activity/getUserActivityAll');
+    let list = await http.post('/activity/getUserActivityAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.userActivityList = list.data.data;
     });

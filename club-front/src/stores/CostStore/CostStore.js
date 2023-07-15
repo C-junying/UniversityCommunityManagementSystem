@@ -12,7 +12,11 @@ class CostStore {
     if (this.manageCostList.length > 0) {
       return;
     }
-    let list = await http.post('/cost/getManageCost');
+    let list = await http.post('/cost/getManageCost', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.manageCostList = list.data.data;
     });
@@ -22,15 +26,27 @@ class CostStore {
     if (this.clubCostList.length > 0) {
       return;
     }
-    let costList = await http.post('/cost/getClubCost', toHump(value));
-    let clubCostList = await http.post('/cost/getPayName', costList.data.data);
+    let costList = await http.post('/cost/getClubCost', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
+    let clubCostList = await http.post('/cost/getPayName', costList.data.data, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.clubCostList = clubCostList.data.data;
     });
   }
   // 获取当前费用的信息
   getCurrentCost(value) {
-    return http.post('/cost/getCostToProject', toHump(value));
+    return http.post('/cost/getCostToProject', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   reset() {
     this.clubCostList = [];

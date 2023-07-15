@@ -12,23 +12,39 @@ class ClubMemberStore {
     if (this.memberList.length > 0 && !flag) {
       return;
     }
-    let memberList = await http.post('/club/getClubMember', toHump(value));
+    let memberList = await http.post('/club/getClubMember', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.memberList = memberList.data.data;
     });
   }
   // 用户加入社团
   addClubMember(value) {
-    return http.post('/club/userJoinMember', toHump(value));
+    return http.post('/club/userJoinMember', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 社长添加成员
   captainAddClubMember(value) {
-    return http.post('/club/addMember', toHump(value));
+    return http.post('/club/addMember', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除成员
   deleteMember(item) {
     this.memberList = this.memberList.filter((member) => member['user_id'] !== item['user_id']);
-    return http.post('/club/deleteMember', toHump(item));
+    return http.post('/club/deleteMember', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 更新成员职位
   updateMemberBear(value) {
@@ -39,12 +55,20 @@ class ClubMemberStore {
       return item;
     });
 
-    return http.post('/club/updateMemberBear', toHump(value));
+    return http.post('/club/updateMemberBear', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
 
   // 成员查询 value:{ clubId, keywords: value }
   async getSearch(value) {
-    let memberList = await http.post('/club/searchClubMember', value);
+    let memberList = await http.post('/club/searchClubMember', value, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.memberList = memberList.data.data;
     });

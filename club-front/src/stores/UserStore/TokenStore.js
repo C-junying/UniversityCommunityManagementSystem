@@ -42,14 +42,22 @@ class TokenStore {
   }
   // 更新用户信息
   async updateUserInfo(value) {
-    let info = await http.post('/users/updateCurrentUser', toHump(value));
+    let info = await http.post('/users/updateCurrentUser', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
     if (info.data.code === 200) this.userInfo = toHump(value);
     else this.userInfo = this.userInfo;
     return info;
   }
   // 更新密码
   updatePassword(value) {
-    return http.post('/users/updatePassword', toHump(value));
+    return http.post('/users/updatePassword', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
 }
 export default TokenStore;

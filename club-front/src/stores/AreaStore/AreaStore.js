@@ -12,20 +12,32 @@ class AreaStore {
     if (this.areaList.length > 0 && !flag) {
       return;
     }
-    let areaList = await http.post('/area/areaAll');
+    let areaList = await http.post('/area/areaAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     runInAction(() => {
       this.areaList = areaList.data.data;
     });
   }
   // 添加场地
   addArea(value) {
-    return http.post('/area/addArea', toHump(value));
+    return http.post('/area/addArea', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 删除场地
   deleteArea(item) {
     this.areaList = this.areaList.filter((area) => area['area_id'] !== item['area_id']);
 
-    return http.post('/area/deleteArea', toHump(item));
+    return http.post('/area/deleteArea', toHump(item), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 更新场地
   updateArea(value) {
@@ -36,11 +48,23 @@ class AreaStore {
       return item;
     });
 
-    return http.post('/area/updateArea', toHump(value));
+    return http.post('/area/updateArea', toHump(value), {
+      headers: {
+        isLoading: true,
+      },
+    });
   }
   // 查询场地
   async getSearch(value) {
-    let areaList = await http.post('/area/areaSearch', { keywords: value });
+    let areaList = await http.post(
+      '/area/areaSearch',
+      { keywords: value },
+      {
+        headers: {
+          isLoading: true,
+        },
+      }
+    );
     runInAction(() => {
       this.areaList = areaList.data.data;
     });
@@ -50,7 +74,11 @@ class AreaStore {
     if (this.areaStatusList.length > 0) {
       return;
     }
-    let list = await http.post('/area/areaStatusAll');
+    let list = await http.post('/area/areaStatusAll', undefined, {
+      headers: {
+        isLoading: true,
+      },
+    });
     let disableList = list.data.data.map((item) => {
       if (item.status !== 1) {
         item.disabled = true;
